@@ -49,17 +49,6 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-ExternalProject_Add(
-
-   tools
-
-   PREFIX "${CMAKE_CURRENT_BINARY_DIR}/tools"
-   SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tools"
-   INSTALL_COMMAND ""
-)
-
-set(B2C "${CMAKE_CURRENT_BINARY_DIR}/tools/src/tools-build/binary2c")
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 file (GLOB font_files "${CMAKE_CURRENT_SOURCE_DIR}/fonts/*")
@@ -73,21 +62,6 @@ foreach(file ${font_files})
 
    string(REGEX MATCH "^(.*)\\.[^.]*$" ignored_output ${fn})
    set(basename ${CMAKE_MATCH_1})
-
-   add_custom_command(
-
-      OUTPUT
-         fonts/${basename}.c
-
-      COMMAND
-         mkdir -p fonts
-
-      COMMAND
-         ${B2C} ${file} fonts/${basename}.c font_${basename}
-
-      DEPENDS
-         tools
-   )
 
    set(cvar "font_${basename}")
    list(APPEND c_font_files fonts/${basename}.c)
