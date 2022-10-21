@@ -11,19 +11,6 @@ if (NOT "${CMAKE_PROJECT_NAME}" STREQUAL "tilck")
       VERSION "0.1.1"
       )
 
-   set(CMAKE_C_FLAGS_DEBUG "-g")
-   set(CMAKE_C_FLAGS_MINSIZEREL "-Os")
-   set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -g")
-   set(CMAKE_C_FLAGS_RELEASE "-O3")
-
-   if (NOT CMAKE_BUILD_TYPE)
-     set(CMAKE_BUILD_TYPE Debug)
-     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_DEBUG}")
-   endif()
-
-   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
-   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wno-unused-parameter")
-
 else()
 
    # We're not using the project() command here because CMake does not handle
@@ -44,10 +31,8 @@ else()
 
 endif()
 
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+message(STATUS "CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
